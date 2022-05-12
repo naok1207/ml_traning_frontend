@@ -5,7 +5,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 const link = createHttpLink({
-  uri: `${process.env.BACKEND_URL || ''}/graphql`,
+  uri: `${process.env.REACT_APP_BACKEND_URL || ''}/graphql`,
   credentials: 'include',
 })
 
