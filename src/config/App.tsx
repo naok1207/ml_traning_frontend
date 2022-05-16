@@ -7,7 +7,6 @@ const App = () => {
   const data = useTest()
 
   useEffect(() => {
-
     console.log("data", data)
   }, [data])
 
