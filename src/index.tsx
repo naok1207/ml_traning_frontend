@@ -1,29 +1,14 @@
+import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './styles/index.css'
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client'
-import App from './config/App'
-import reportWebVitals from './config/reportWebVitals'
-
-const link = createHttpLink({
-  uri: `${process.env.REACT_APP_BACKEND_URL || ''}/graphql`,
-  credentials: 'include',
-})
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link,
-})
+import './index.css'
+import App from './App'
+import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <ApolloProvider client={client}>
+  <React.StrictMode>
     <App />
-  </ApolloProvider>
+  </React.StrictMode>
 )
 
 // If you want to start measuring performance in your app, pass a function
