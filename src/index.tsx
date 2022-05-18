@@ -1,13 +1,12 @@
 import ReactDOM from 'react-dom/client'
-import './styles/index.css'
 import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client'
-import App from './config/App'
-import reportWebVitals from './config/reportWebVitals'
+import App from './App'
+import reportWebVitals from './App/reportWebVitals'
 
 const link = createHttpLink({
   uri: `${process.env.REACT_APP_BACKEND_URL || ''}/graphql`,
