@@ -5,6 +5,7 @@ export const StyledModal = styled.div`
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 100;
 `
 
 export const CloseButton = styled.button`

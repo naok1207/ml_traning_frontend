@@ -6,7 +6,6 @@ export default createGlobalStyle`
     height: 100vh;
     color: ${color.primary};
     background-color: ${color.backgroundDarkPrimary};
-    overflow-y: hidden;
   }
   #root {
     height: 100%;

@@ -4,10 +4,10 @@ import { neomorphic, neomorphicSink } from '../../styles/mixin'
 export const StyledInput = styled.div`
   width: 100%;
   background: linear-gradient(
-      125deg,
-      rgba(255, 255, 255, 0.005) -12%,
-      rgba(255, 255, 255, 0.025) 114%
-    );
+    125deg,
+    rgba(255, 255, 255, 0.005) -12%,
+    rgba(255, 255, 255, 0.025) 114%
+  );
   ${neomorphic}
   border-radius: 4px;
 `

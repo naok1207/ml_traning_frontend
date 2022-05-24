@@ -5,12 +5,13 @@ import IconClose from '../../images/close.svg'
 
 type Props = {
   children?: ReactNode
+  onClose: () => void
 }
 
-const Modal: FC<Props> = ({ children }) => (
+const Modal: FC<Props> = ({ children, onClose }) => (
   <StyledModal>
     <Card radius={10}>
-      <CloseButton>
+      <CloseButton onClick={() => onClose()}>
         <img src={IconClose} alt="closeIcon" />
       </CloseButton>
       {children}

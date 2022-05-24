@@ -1,5 +1,5 @@
-query Task($taskId: ID!) {
-  task(id: $taskId) {
+query Tasks {
+  tasks {
     createdAt
     description
     id

@@ -8,17 +8,17 @@ import TextArea from '../../shared/components/TextArea'
 
 // しばらくサンプル置き場とする
 const Top = () => (
-    <>
-      <h2>TOP</h2>
-      <Card />
-      <Input />
-      <Button>+ AddTask</Button>
-      <Screen onClose={() => console.log("close")} />
-      <Modal>
-        <Input label='password' placeholder='password' />
-        <TextArea label='content' placeholder='content' />
-      </Modal>
-    </>
-  )
+  <>
+    <h2>TOP</h2>
+    <Card />
+    <Input />
+    <Button>+ AddTask</Button>
+    <Screen onClose={() => console.log('close')} />
+    <Modal onClose={() => console.log('close')}>
+      <Input label="password" placeholder="password" />
+      <TextArea label="content" placeholder="content" />
+    </Modal>
+  </>
+)
 
 export default Top

@@ -6,24 +6,28 @@ type Props = {
   className?: string
   disable?: boolean
   onClick?: () => void
+  type?: "button" | "submit"
 }
 
-const Button = forwardRef<HTMLButtonElement, Props>(({ children, className = '', disable = false, onClick }, ref ) => {
-  const handleClick = () => {
-    if (!onClick) return
-    onClick()
-  }
+const Button = forwardRef<HTMLButtonElement, Props>(
+  ({ children, className = '', disable = false, onClick, type = "button" }, ref) => {
+    const handleClick = () => {
+      if (!onClick) return
+      onClick()
+    }
 
-  return (
-    <StyledButton
-      className={className}
-      disabled={disable}
-      onClick={handleClick}
-      ref={ref}
-    >
-      {children}
-    </StyledButton>
-  )
-})
+    return (
+      <StyledButton
+        className={className}
+        disabled={disable}
+        onClick={handleClick}
+        ref={ref}
+        type={type}
+      >
+        {children}
+      </StyledButton>
+    )
+  }
+)
 
 export default Button

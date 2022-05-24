@@ -1,5 +1,10 @@
-import React from 'react'
+import Board from './Board'
+import { StyledProject } from './Styles'
 
-const Project = () => <div>Project</div>
+const Project = () => (
+  <StyledProject>
+    <Board />
+  </StyledProject>
+)
 
 export default Project

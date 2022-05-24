@@ -1,31 +1,34 @@
-import React, { ChangeEvent, forwardRef } from 'react'
+import React, { forwardRef, InputHTMLAttributes } from 'react'
+import { DeepMap, FieldValues, FieldError } from "react-hook-form"
+import { ErrorMessage } from '@hookform/error-message';
 import { StyledField } from '../../styles'
 import { TextAreaElement, StyledTextArea } from './Styles'
 
-type PropType = {
+interface PropType extends InputHTMLAttributes<HTMLTextAreaElement> {
   className?: string
   label?: string
-  name?: string
-  placeholder?: string
-  onChange?: (event: ChangeEvent) => void
+  errors?: DeepMap<FieldValues, FieldError>
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, PropType>(
-  ({ className = '', label, name = '', onChange, placeholder = '' }, ref) => {
-    const handleChange = (event: ChangeEvent) => {
-      if (!onChange) return
-      onChange(event)
-    }
-
-    return (
+  ({ className = '', label, errors = {}, ...textareaProps }, ref) => (
       <StyledField>
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && <label htmlFor={textareaProps.name || ''}>{label}</label>}
         <StyledTextArea className={className}>
-          <TextAreaElement name={name} onChange={handleChange} placeholder={placeholder} ref={ref} />
+          <TextAreaElement {...textareaProps} ref={ref} />
         </StyledTextArea>
+        <ErrorMessage
+          errors={errors}
+          name={textareaProps.name || ''}
+          render={({ messages }) =>
+            messages &&
+            Object.entries(messages).map(([type, message]) => (
+              <p key={type}>{message}</p>
+            ))
+          }
+        />
       </StyledField>
     )
-  }
 )
 
 export default TextArea

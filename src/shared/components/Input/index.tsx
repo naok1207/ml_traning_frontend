@@ -1,31 +1,34 @@
-import React, { ChangeEvent, forwardRef } from 'react'
+import React, { forwardRef, InputHTMLAttributes } from 'react'
+import { DeepMap, FieldValues, FieldError } from "react-hook-form"
+import { ErrorMessage } from '@hookform/error-message';
 import { StyledField } from '../../styles'
 import { InputElement, StyledInput } from './Styles'
 
-type PropType = {
+interface PropType extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
   label?: string
-  name?: string
-  placeholder?: string
-  onChange?: (event: ChangeEvent) => void
+  errors?: DeepMap<FieldValues, FieldError>
 }
 
 const Input = forwardRef<HTMLInputElement, PropType>(
-  ({ className = '', label, name = '', onChange, placeholder = '' }, ref) => {
-    const handleChange = (event: ChangeEvent) => {
-      if (!onChange) return
-      onChange(event)
-    }
-
-    return (
+  ({ className = '', label, errors = {}, ...inputProps }, ref) => (
       <StyledField>
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && <label htmlFor={inputProps.name}>{label}</label>}
         <StyledInput className={className}>
-          <InputElement name={name} onChange={handleChange} placeholder={placeholder} ref={ref} />
+          <InputElement {...inputProps} ref={ref} />
         </StyledInput>
+        <ErrorMessage
+          errors={errors}
+          name={inputProps.name || ''}
+          render={({ messages }) =>
+            messages &&
+            Object.entries(messages).map(([type, message]) => (
+              <p key={type}>{message}</p>
+            ))
+          }
+        />
       </StyledField>
     )
-  }
 )
 
 export default Input
