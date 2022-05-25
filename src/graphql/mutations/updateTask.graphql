@@ -7,7 +7,6 @@ mutation UpdateTask($input: TaskUpdateInput!) {
       status
       title
       updatedAt
-      clientMutationId
     }
   }
 }
