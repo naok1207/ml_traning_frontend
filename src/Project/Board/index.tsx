@@ -53,7 +53,6 @@ const Board = () => {
       ) : (
         <StyledDetail />
       )}
-
     </StyledBoard>
   )
 }
