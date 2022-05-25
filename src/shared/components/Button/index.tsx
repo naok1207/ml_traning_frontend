@@ -6,11 +6,14 @@ type Props = {
   className?: string
   disable?: boolean
   onClick?: () => void
-  type?: "button" | "submit"
+  type?: 'button' | 'submit'
 }
 
 const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ children, className = '', disable = false, onClick, type = "button" }, ref) => {
+  (
+    { children, className = '', disable = false, onClick, type = 'button' },
+    ref
+  ) => {
     const handleClick = () => {
       if (!onClick) return
       onClick()

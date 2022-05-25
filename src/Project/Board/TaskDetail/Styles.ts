@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { color } from "../../../shared/styles/color"
+import { color } from '../../../shared/styles/color'
 import Card from '../../../shared/components/Card'
 
 export const StyledDetail = styled(Card)``
@@ -16,7 +16,8 @@ export const Header = styled.div`
   display: flex;
   justify-content: flex-end;
 
-  button, p {
+  button,
+  p {
     font-size: 8px;
   }
 `

@@ -1,10 +1,23 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useForm, SubmitHandler } from "react-hook-form"
-import { TaskAttributes, useDeleteTaskMutation, useTaskQuery, useUpdateTaskMutation } from '../../../graphql/graphql'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import {
+  TaskAttributes,
+  useDeleteTaskMutation,
+  useTaskQuery,
+  useUpdateTaskMutation,
+} from '../../../graphql/graphql'
 import Button from '../../../shared/components/Button'
 import Input from '../../../shared/components/Input'
 import TextArea from '../../../shared/components/TextArea'
-import { DeleteButton, Description, Header, StyledDetail, Title, ToggleButton, ToggleLabel } from './Styles'
+import {
+  DeleteButton,
+  Description,
+  Header,
+  StyledDetail,
+  Title,
+  ToggleButton,
+  ToggleLabel,
+} from './Styles'
 
 type Props = {
   id: string
@@ -16,7 +29,13 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [deleteTask] = useDeleteTaskMutation({ refetchQueries: ['Tasks'] })
   const [updateTask] = useUpdateTaskMutation({ refetchQueries: ['Tasks'] })
-  const { register, formState: { errors }, reset, handleSubmit, clearErrors } = useForm<TaskAttributes>({ criteriaMode: 'all', })
+  const {
+    register,
+    formState: { errors },
+    reset,
+    handleSubmit,
+    clearErrors,
+  } = useForm<TaskAttributes>({ criteriaMode: 'all' })
 
   useEffect(() => {
     setIsEdit(false)
@@ -29,9 +48,11 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
 
   if (!taskQuery?.data) return <StyledDetail />
 
-  const { task: { title, description } } = taskQuery.data
+  const {
+    task: { title, description },
+  } = taskQuery.data
 
-  const onSubmit: SubmitHandler<TaskAttributes> = data => {
+  const onSubmit: SubmitHandler<TaskAttributes> = (data) => {
     void updateTask({ variables: { input: { id, params: data } } })
     setIsEdit(!isEdit)
   }
@@ -55,7 +76,7 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
             label="title"
             defaultValue={title}
             {...register('title', {
-              required: "This is required."
+              required: 'This is required.',
             })}
             errors={errors}
           />
@@ -65,7 +86,7 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
             {...register('description')}
             errors={errors}
           />
-          <Button type='submit'>update</Button>
+          <Button type="submit">update</Button>
         </form>
       ) : (
         <>

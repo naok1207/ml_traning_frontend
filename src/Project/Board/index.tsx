@@ -34,9 +34,7 @@ const Board = () => {
     <StyledBoard>
       {isShowCreateTaskModal && (
         <Modal onClose={() => setIsShowCreateTaskModal(false)}>
-          <TaskCreate
-            modalClose={() => setIsShowCreateTaskModal(false)}
-          />
+          <TaskCreate modalClose={() => setIsShowCreateTaskModal(false)} />
         </Modal>
       )}
       <Card radius={10}>
@@ -45,11 +43,8 @@ const Board = () => {
         </Button>
       </Card>
       <TaskList tasks={tasks} onSelectId={handleSelectId} />
-      { selectTaskId ? (
-        <TaskDetail
-          id={selectTaskId}
-          onDelete={() => setSelectTaskId('')}
-        />
+      {selectTaskId ? (
+        <TaskDetail id={selectTaskId} onDelete={() => setSelectTaskId('')} />
       ) : (
         <StyledDetail />
       )}
