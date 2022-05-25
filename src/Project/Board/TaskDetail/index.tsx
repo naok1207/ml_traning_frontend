@@ -44,8 +44,8 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
   return (
     <StyledDetail>
       <Header>
-        <ToggleLabel>{isEdit ? 'Edit' : 'View'}</ToggleLabel>
-        <ToggleButton onClick={() => setIsEdit(!isEdit)}>モード切り替え</ToggleButton>
+        <ToggleLabel>{isEdit ? 'edit' : 'view'}</ToggleLabel>
+        <ToggleButton onClick={() => setIsEdit(!isEdit)}>切り替え</ToggleButton>
         <DeleteButton onClick={handleDelete}>delete</DeleteButton>
       </Header>
       {isEdit ? (

@@ -16,3 +16,12 @@ export const neomorphicSink = css`
     inset 5px 5px 20px rgba(0, 0, 0, 0.5),
     inset -5px -5px 10px rgba(255, 255, 255, 0.15);
 `
+
+export const labelStyle = css`
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03rem;
+  padding-left: 12px;
+  margin-bottom: 10px !important;
+`

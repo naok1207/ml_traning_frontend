@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { neomorphic, neomorphicSink } from '../../styles/mixin'
+import { labelStyle, neomorphic, neomorphicSink } from '../../styles/mixin'
 
 export const StyledInput = styled.div`
   width: 100%;
@@ -12,6 +12,10 @@ export const StyledInput = styled.div`
   border-radius: 4px;
 `
 
+export const StyledLabel = styled.label`
+  ${labelStyle}
+`
+
 export const InputElement = styled.input`
   width: 100%;
   background-color: transparent;
@@ -21,4 +25,6 @@ export const InputElement = styled.input`
   padding: 10px;
   ${neomorphicSink}
   border: 4px solid transparent;
+  font-size: 12px;
+  letter-spacing: 0.01rem;
 `

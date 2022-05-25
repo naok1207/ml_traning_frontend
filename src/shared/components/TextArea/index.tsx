@@ -2,7 +2,7 @@ import React, { forwardRef, InputHTMLAttributes } from 'react'
 import { DeepMap, FieldValues, FieldError } from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message';
 import { StyledField } from '../../styles'
-import { TextAreaElement, StyledTextArea } from './Styles'
+import { TextAreaElement, StyledTextArea, StyledLabel } from './Styles'
 
 interface PropType extends InputHTMLAttributes<HTMLTextAreaElement> {
   className?: string
@@ -13,7 +13,7 @@ interface PropType extends InputHTMLAttributes<HTMLTextAreaElement> {
 const TextArea = forwardRef<HTMLTextAreaElement, PropType>(
   ({ className = '', label, errors = {}, ...textareaProps }, ref) => (
       <StyledField>
-        {label && <label htmlFor={textareaProps.name || ''}>{label}</label>}
+        {label && <StyledLabel htmlFor={textareaProps.name || ''}>{label}</StyledLabel>}
         <StyledTextArea className={className}>
           <TextAreaElement {...textareaProps} ref={ref} />
         </StyledTextArea>

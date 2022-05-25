@@ -2,7 +2,7 @@ import React, { forwardRef, InputHTMLAttributes } from 'react'
 import { DeepMap, FieldValues, FieldError } from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message';
 import { StyledField } from '../../styles'
-import { InputElement, StyledInput } from './Styles'
+import { InputElement, StyledInput, StyledLabel } from './Styles'
 
 interface PropType extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
@@ -13,7 +13,7 @@ interface PropType extends InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, PropType>(
   ({ className = '', label, errors = {}, ...inputProps }, ref) => (
       <StyledField>
-        {label && <label htmlFor={inputProps.name}>{label}</label>}
+        {label && <StyledLabel htmlFor={inputProps.name}>{label}</StyledLabel>}
         <StyledInput className={className}>
           <InputElement {...inputProps} ref={ref} />
         </StyledInput>

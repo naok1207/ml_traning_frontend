@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { TaskAttributes, useCreateTaskMutation } from '../../graphql/graphql'
-import Button from '../../shared/components/Button'
 import Input from '../../shared/components/Input'
 import TextArea from '../../shared/components/TextArea'
-import { Form, StyledTaskCreate, Title } from './Styles'
+import { Form, StyledTaskCreate, SubmitButton, Title } from './Styles'
 
 type Props = {
   modalClose: () => void
@@ -37,7 +36,7 @@ const TaskCreate: FC<Props> = ({ modalClose }) => {
           label="description"
           {...register('description')}
         />
-        <Button type='submit'>Create</Button>
+        <SubmitButton type='submit'>Create</SubmitButton>
       </Form>
     </StyledTaskCreate>
   )

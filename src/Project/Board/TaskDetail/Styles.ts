@@ -4,12 +4,21 @@ import Card from '../../../shared/components/Card'
 
 export const StyledDetail = styled(Card)``
 
-export const Title = styled.p``
+export const Title = styled.p`
+  font-size: 20px;
+`
 
-export const Description = styled.p``
+export const Description = styled.p`
+  font-size: 16px;
+`
 
 export const Header = styled.div`
   display: flex;
+  justify-content: flex-end;
+
+  button, p {
+    font-size: 8px;
+  }
 `
 
 export const ToggleLabel = styled.p`
@@ -22,8 +31,10 @@ export const ToggleButton = styled.button`
   color: ${color.primary};
   appearance: none;
   border: none;
-  margin-left: auto;
   cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `
 
 export const DeleteButton = styled.button`
@@ -32,6 +43,8 @@ export const DeleteButton = styled.button`
   color: ${color.primary};
   appearance: none;
   border: none;
-  margin-left: auto;
   cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `
