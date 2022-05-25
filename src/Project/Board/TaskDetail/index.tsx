@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { TaskAttributes, useTaskQuery, useUpdateTaskMutation } from '../../../graphql/graphql'
+import { TaskAttributes, useDeleteTaskMutation, useTaskQuery, useUpdateTaskMutation } from '../../../graphql/graphql'
 import Button from '../../../shared/components/Button'
 import Input from '../../../shared/components/Input'
 import TextArea from '../../../shared/components/TextArea'
@@ -8,12 +8,13 @@ import { DeleteButton, Description, Header, StyledDetail, Title, ToggleButton, T
 
 type Props = {
   id: string
-  onDelete: (taskId: string) => void
+  onDelete: () => void
 }
 
 const TaskDetail: FC<Props> = ({ id, onDelete }) => {
   const taskQuery = useTaskQuery({ variables: { taskId: id } })
   const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [deleteTask] = useDeleteTaskMutation({ refetchQueries: ['Tasks'] })
   const [updateTask] = useUpdateTaskMutation({ refetchQueries: ['Tasks'] })
   const { register, formState: { errors }, reset, handleSubmit, clearErrors } = useForm<TaskAttributes>({ criteriaMode: 'all', })
 
@@ -35,12 +36,17 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
     setIsEdit(!isEdit)
   }
 
+  const handleDelete = () => {
+    void deleteTask({ variables: { input: { id } } })
+    onDelete()
+  }
+
   return (
     <StyledDetail>
       <Header>
         <ToggleLabel>{isEdit ? 'Edit' : 'View'}</ToggleLabel>
         <ToggleButton onClick={() => setIsEdit(!isEdit)}>モード切り替え</ToggleButton>
-        <DeleteButton onClick={() => onDelete(id)}>delete</DeleteButton>
+        <DeleteButton onClick={handleDelete}>delete</DeleteButton>
       </Header>
       {isEdit ? (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -56,9 +62,7 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
           <TextArea
             label="description"
             defaultValue={description || ''}
-            {...register('description', {
-              required: "This is required."
-            })}
+            {...register('description')}
             errors={errors}
           />
           <Button type='submit'>update</Button>

@@ -1,4 +1,6 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
+import { useForm, SubmitHandler } from "react-hook-form"
+import { TaskAttributes, useCreateTaskMutation } from '../../graphql/graphql'
 import Button from '../../shared/components/Button'
 import Input from '../../shared/components/Input'
 import TextArea from '../../shared/components/TextArea'
@@ -6,32 +8,36 @@ import { Form, StyledTaskCreate, Title } from './Styles'
 
 type Props = {
   modalClose: () => void
-  onCreate: (title: string, description: string) => void
 }
 
-const TaskCreate: FC<Props> = ({ modalClose, onCreate }) => {
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
+const TaskCreate: FC<Props> = ({ modalClose }) => {
+  const { register, formState: { errors }, reset, handleSubmit, clearErrors } = useForm<TaskAttributes>({ criteriaMode: 'all', })
+  const [createTask] = useCreateTaskMutation({ refetchQueries: ['Tasks'] })
+
+  const onSubmit: SubmitHandler<TaskAttributes> = data => {
+    void createTask({ variables: { params: data } })
+    reset()
+    clearErrors()
+    modalClose()
+  }
 
   return (
     <StyledTaskCreate>
       <Title>Create Task</Title>
-      <Form>
-        <Input label="title" onChange={(e) => setTitle(e.target.value)} />
+      { /* eslint-disable-next-line @typescript-eslint/no-misused-promises */ }
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="title"
+          {...register('title', {
+            required: "This is required."
+          })}
+          errors={errors}
+        />
         <TextArea
           label="description"
-          onChange={(e) => setDescription(e.target.value)}
+          {...register('description')}
         />
-        <Button
-          onClick={() => {
-            onCreate(title, description)
-            setTitle('')
-            setDescription('')
-            modalClose()
-          }}
-        >
-          Create
-        </Button>
+        <Button type='submit'>Create</Button>
       </Form>
     </StyledTaskCreate>
   )

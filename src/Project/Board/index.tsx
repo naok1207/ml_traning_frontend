@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Task, useCreateTaskMutation, useDeleteTaskMutation, useTasksQuery } from '../../graphql/graphql'
+import { Task, useTasksQuery } from '../../graphql/graphql'
 import Button from '../../shared/components/Button'
 import Card from '../../shared/components/Card'
 import Modal from '../../shared/components/Modal'
@@ -14,8 +14,6 @@ const Board = () => {
   const [isShowCreateTaskModal, setIsShowCreateTaskModal] =
     useState<boolean>(false)
   const [selectTaskId, setSelectTaskId] = useState<string>()
-  const [deleteTask] = useDeleteTaskMutation({ refetchQueries: ['Tasks'] })
-  const [createTask] = useCreateTaskMutation({ refetchQueries: ['Tasks'] })
   const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
@@ -32,22 +30,12 @@ const Board = () => {
     toggleActive(taskElementId(beforeTaskId), taskElementId(taskId))
   }
 
-  const handleDeleteTask = (taskId: string) => {
-    void deleteTask({ variables: { input: { id: taskId } } })
-    setSelectTaskId('')
-  }
-
-  const handleCreateTask = (title: string, description: string) => {
-    void createTask({ variables: { params: { title, description } } })
-  }
-
   return (
     <StyledBoard>
       {isShowCreateTaskModal && (
         <Modal onClose={() => setIsShowCreateTaskModal(false)}>
           <TaskCreate
             modalClose={() => setIsShowCreateTaskModal(false)}
-            onCreate={handleCreateTask}
           />
         </Modal>
       )}
@@ -60,7 +48,7 @@ const Board = () => {
       { selectTaskId ? (
         <TaskDetail
           id={selectTaskId}
-          onDelete={handleDeleteTask}
+          onDelete={() => setSelectTaskId('')}
         />
       ) : (
         <StyledDetail />
