@@ -1,4 +1,3 @@
-import { useApolloClient } from '@apollo/client'
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Link, Navigate, useNavigate, useOutletContext } from 'react-router-dom'
@@ -9,7 +8,6 @@ import { validation } from '../../../shared/utils/validation'
 import { AuthForm, AuthFormButton, AuthFormTitle, AuthLinkWrapper } from '../Styles'
 
 const SignIn = () => {
-  const client = useApolloClient()
   const navigate = useNavigate()
   const [isAuthorized] = useOutletContext<[boolean]>()
   const {
@@ -20,9 +18,7 @@ const SignIn = () => {
 
   const onSubmit: SubmitHandler<AuthType> = data => {
     void onSignIn(data).then(() => {
-      void client.resetStore().then(() => {
-        navigate(linkPath.project)
-      })
+      navigate(linkPath.project)
     })
   }
 

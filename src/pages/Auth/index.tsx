@@ -4,7 +4,7 @@ import { useCurrentUserQuery } from '../../graphql/graphql'
 import { StyledAuth } from './Styles'
 
 const Auth = () => {
-  const { error, loading } = useCurrentUserQuery({fetchPolicy: 'network-only'})
+  const { error, loading } = useCurrentUserQuery()
 
   if (loading) return <div>Loading...</div>
 

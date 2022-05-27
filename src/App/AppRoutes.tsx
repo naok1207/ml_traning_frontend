@@ -4,6 +4,7 @@ import Auth from '../pages/Auth'
 import SignIn from '../pages/Auth/SignIn'
 import SignOut from '../pages/Auth/SignOut'
 import SignUp from '../pages/Auth/SignUp'
+import NotFound from '../pages/Notfound'
 import Top from '../pages/Top'
 import Project from '../Project'
 
@@ -16,6 +17,7 @@ const AppRoutes = () => (
       <Route path="signout" element={<SignOut />} />
     </Route>
     <Route path="project" element={<Project />} />
+    <Route path="*" element={<NotFound />} />
   </Routes>
 )
 

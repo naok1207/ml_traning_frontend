@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
 import { Task, useTasksQuery } from '../../graphql/graphql'
 import Button from '../../shared/components/Button'
 import Card from '../../shared/components/Card'
+import PageError from '../../shared/components/PageError'
 import Modal from '../../shared/components/Modal'
-import { linkPath } from '../../shared/utils/linkPath'
 import { toggleActive } from '../../shared/utils/toggleActive'
 import TaskCreate from '../TaskCreate'
 import { StyledBoard } from './Styles'
@@ -24,7 +23,7 @@ const Board = () => {
   }, [taskQuery.data])
 
   if (taskQuery.loading) return <div>Loading</div>
-  if (taskQuery.error) return <Navigate to={linkPath.signin} />
+  if (taskQuery.error) return <PageError error={taskQuery.error} />
 
   const handleSelectId = (taskId: string) => {
     const beforeTaskId = selectTaskId || ''
