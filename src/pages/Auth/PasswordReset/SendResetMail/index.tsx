@@ -33,7 +33,7 @@ const SendResetMail = () => {
             })}
             errors={errors}
         />
-        <Button type='submit'>SendEmail</Button>
+        <Button type='submit'>送信</Button>
       </AuthForm>
     </>
   )

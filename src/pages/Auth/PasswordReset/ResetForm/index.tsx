@@ -55,7 +55,7 @@ const ResetForm: FC<Props> = ({ resetPasswordToken }) => {
           value={resetPasswordToken}
           {...register('resetPasswordToken')}
         />
-        <Button type='submit'>SendEmail</Button>
+        <Button type='submit'>変更</Button>
       </AuthForm>
     </>
   )
