@@ -14,7 +14,7 @@ const Top = () => (
     <Input />
     <Button>+ AddTask</Button>
     <Screen onClose={() => console.log('close')} />
-    <Modal onClose={() => console.log('close')}>
+    <Modal isShown onClose={() => console.log('close')}>
       <Input label="password" placeholder="password" />
       <TextArea label="content" placeholder="content" />
     </Modal>

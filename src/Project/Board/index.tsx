@@ -11,9 +11,9 @@ import TaskList from './TaskList'
 
 const Board = () => {
   const taskQuery = useTasksQuery()
-  const [isShowCreateTaskModal, setIsShowCreateTaskModal] =
+  const [isShownCreateTaskModal, setIsShownCreateTaskModal] =
     useState<boolean>(false)
-  const [selectTaskId, setSelectTaskId] = useState<string>()
+  const [selectedTaskId, setSelectedTaskId] = useState<string>()
   const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
@@ -24,27 +24,25 @@ const Board = () => {
   if (taskQuery.loading) return <div>Loading</div>
 
   const handleSelectId = (taskId: string) => {
-    const beforeTaskId = selectTaskId || ''
-    setSelectTaskId(taskId)
+    const beforeTaskId = selectedTaskId || ''
+    setSelectedTaskId(taskId)
     const taskElementId = (id: string) => `task-${id}`
     toggleActive(taskElementId(beforeTaskId), taskElementId(taskId))
   }
 
   return (
     <StyledBoard>
-      {isShowCreateTaskModal && (
-        <Modal onClose={() => setIsShowCreateTaskModal(false)}>
-          <TaskCreate modalClose={() => setIsShowCreateTaskModal(false)} />
-        </Modal>
-      )}
+      <Modal isShown={isShownCreateTaskModal} onClose={() => setIsShownCreateTaskModal(false)}>
+        <TaskCreate modalClose={() => setIsShownCreateTaskModal(false)} />
+      </Modal>
       <Card radius={10}>
-        <Button onClick={() => setIsShowCreateTaskModal(true)}>
+        <Button onClick={() => setIsShownCreateTaskModal(true)}>
           + Create Task
         </Button>
       </Card>
       <TaskList tasks={tasks} onSelectId={handleSelectId} />
-      {selectTaskId ? (
-        <TaskDetail id={selectTaskId} onDelete={() => setSelectTaskId('')} />
+      {selectedTaskId ? (
+        <TaskDetail id={selectedTaskId} onDelete={() => setSelectedTaskId('')} />
       ) : (
         <StyledDetail />
       )}

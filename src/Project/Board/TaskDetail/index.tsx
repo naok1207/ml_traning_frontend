@@ -26,7 +26,7 @@ type Props = {
 
 const TaskDetail: FC<Props> = ({ id, onDelete }) => {
   const taskQuery = useTaskQuery({ variables: { taskId: id } })
-  const [isEdit, setIsEdit] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(false)
   const [deleteTask] = useDeleteTaskMutation({ refetchQueries: ['Tasks'] })
   const [updateTask] = useUpdateTaskMutation({ refetchQueries: ['Tasks'] })
   const {
@@ -38,13 +38,10 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
   } = useForm<TaskAttributes>({ criteriaMode: 'all' })
 
   useEffect(() => {
-    setIsEdit(false)
-  }, [id])
-
-  useEffect(() => {
+    setIsEditing(false)
     reset()
     clearErrors()
-  }, [clearErrors, isEdit, reset])
+  }, [clearErrors, id, reset])
 
   if (!taskQuery?.data) return <StyledDetail />
 
@@ -54,22 +51,28 @@ const TaskDetail: FC<Props> = ({ id, onDelete }) => {
 
   const onSubmit: SubmitHandler<TaskAttributes> = (data) => {
     void updateTask({ variables: { input: { id, params: data } } })
-    setIsEdit(!isEdit)
+      .then(() => {
+        setIsEditing(!isEditing)
+      })
   }
 
   const handleDelete = () => {
-    void deleteTask({ variables: { input: { id } } })
-    onDelete()
+    void deleteTask({
+      variables: { input: { id } },
+      update() {
+        onDelete()
+      }
+    })
   }
 
   return (
     <StyledDetail>
       <Header>
-        <ToggleLabel>{isEdit ? 'edit' : 'view'}</ToggleLabel>
-        <ToggleButton onClick={() => setIsEdit(!isEdit)}>切り替え</ToggleButton>
+        <ToggleLabel>{isEditing ? 'edit' : 'view'}</ToggleLabel>
+        <ToggleButton onClick={() => setIsEditing(!isEditing)}>切り替え</ToggleButton>
         <DeleteButton onClick={handleDelete}>delete</DeleteButton>
       </Header>
-      {isEdit ? (
+      {isEditing ? (
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
