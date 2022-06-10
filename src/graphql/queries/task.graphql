@@ -1,0 +1,10 @@
+query Task($taskId: ID!) {
+  task(id: $taskId) {
+    createdAt
+    description
+    id
+    status
+    title
+    updatedAt
+  }
+}

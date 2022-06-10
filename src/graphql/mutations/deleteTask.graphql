@@ -1,0 +1,6 @@
+mutation deleteTask($input: TaskDeleteInput!) {
+  deleteTask(input: $input) {
+    id
+    clientMutationId
+  }
+}

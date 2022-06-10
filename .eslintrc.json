@@ -63,12 +63,14 @@
         ],
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off",
+        "react/require-default-props": "off",
         "no-void": [
             "error",
             {
                 "allowAsStatement": true
             }
-        ]
+        ],
+        "react/jsx-props-no-spreading": ["off"]
     },
     "settings": {
         "import/resolver": {
