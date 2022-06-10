@@ -1,15 +1,19 @@
 import styled from 'styled-components'
-import { neomorphic, neomorphicSink } from '../../styles/mixin'
+import { labelStyle, neomorphic, neomorphicSink } from '../../styles/mixin'
 
 export const StyledInput = styled.div`
   width: 100%;
   background: linear-gradient(
-      125deg,
-      rgba(255, 255, 255, 0.005) -12%,
-      rgba(255, 255, 255, 0.025) 114%
-    );
+    125deg,
+    rgba(255, 255, 255, 0.005) -12%,
+    rgba(255, 255, 255, 0.025) 114%
+  );
   ${neomorphic}
   border-radius: 4px;
+`
+
+export const StyledLabel = styled.label`
+  ${labelStyle}
 `
 
 export const InputElement = styled.input`
@@ -21,4 +25,6 @@ export const InputElement = styled.input`
   padding: 10px;
   ${neomorphicSink}
   border: 4px solid transparent;
+  font-size: 12px;
+  letter-spacing: 0.01rem;
 `

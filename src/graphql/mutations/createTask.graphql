@@ -1,0 +1,12 @@
+mutation createTask($params: TaskAttributes!) {
+  createTask(input: { params: $params }) {
+    task {
+      createdAt
+      description
+      id
+      status
+      title
+      updatedAt
+    }
+  }
+}

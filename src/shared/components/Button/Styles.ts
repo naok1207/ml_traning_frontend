@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledButton = styled.button`
   height: 32px;
-  background: linear-gradient(125deg, #FECE03 100%, #EBBF02 100%);
+  background: linear-gradient(125deg, #fece03 100%, #ebbf02 100%);
   border-radius: 4px;
   color: #000000;
   white-space: nowrap;
@@ -10,9 +10,13 @@ export const StyledButton = styled.button`
   appearance: none;
   padding: 0 12px;
   border: none;
+  cursor: pointer;
 
   &:disabled {
     opacity: 0.6;
     cursor: default;
+  }
+  &:hover {
+    opacity: 0.7;
   }
 `

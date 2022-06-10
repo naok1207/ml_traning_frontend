@@ -1,5 +1,10 @@
 import React, { FC, ReactNode } from 'react'
-import { CloseButton, ScreenContainer, ScreenHeader, StyledScreen } from './Styles'
+import {
+  CloseButton,
+  ScreenContainer,
+  ScreenHeader,
+  StyledScreen,
+} from './Styles'
 import IconClose from '../../images/close.svg'
 
 type Props = {
@@ -9,7 +14,12 @@ type Props = {
   onClose: () => void
 }
 
-const Screen: FC<Props> = ({ children, className = '', headerMenu, onClose }) => (
+const Screen: FC<Props> = ({
+  children,
+  className = '',
+  headerMenu,
+  onClose,
+}) => (
   <StyledScreen className={className}>
     <ScreenContainer>
       <ScreenHeader>
