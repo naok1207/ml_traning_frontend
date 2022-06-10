@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledBoard = styled.div`
-  height: 100%;
+  height: calc(100% - 72px);
   width: 100%;
-  padding: 32px;
+  padding: 0 32px 32px;
   display: flex;
 `

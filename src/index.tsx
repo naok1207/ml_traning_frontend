@@ -5,17 +5,30 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context';
 import App from './App'
 import reportWebVitals from './App/reportWebVitals'
+import { getStoredAuthToken } from './shared/utils/authToken'
 
-const link = createHttpLink({
+const httpLink = createHttpLink({
   uri: `${process.env.REACT_APP_BACKEND_URL || ''}/graphql`,
   credentials: 'include',
 })
 
+const authLink = setContext((_, { headers }) => {
+  const token = getStoredAuthToken()
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    headers: {
+      ...headers,
+      authorization: token || ''
+    }
+  }
+})
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link,
+  link: authLink.concat(httpLink),
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
