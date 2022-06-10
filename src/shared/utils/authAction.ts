@@ -127,3 +127,50 @@ export const PasswordReset = {
   sendEmail,
   onReset
 }
+
+// Confirmation
+type ConfirmationType = {
+  confirmationToken: string
+}
+
+const onConfirm = ({ confirmationToken }: ConfirmationType) =>
+  fetch(authUrl(`confirmation?confirmation_token=${confirmationToken}`), {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(res.toString());
+  })
+
+export type ResendEmailType = {
+  email: string
+}
+
+const resendEmail = ({ email }: ResendEmailType) =>
+  fetch(authUrl("confirmation"), {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user: {
+        email
+      }
+    })
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(res.toString());
+  })
+
+export const Confirm = {
+  onConfirm,
+  resendEmail
+}
