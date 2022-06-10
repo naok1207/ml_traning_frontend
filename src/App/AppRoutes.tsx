@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Auth from '../pages/Auth'
+import PasswordReset from '../pages/Auth/PasswordReset'
 import SignIn from '../pages/Auth/SignIn'
 import SignOut from '../pages/Auth/SignOut'
 import SignUp from '../pages/Auth/SignUp'
@@ -16,6 +17,7 @@ const AppRoutes = () => (
       <Route path="signup" element={<SignUp />} />
       <Route path="signin" element={<SignIn />} />
       <Route path="signout" element={<SignOut />} />
+      <Route path="password" element={<PasswordReset />} />
     </Route>
     <Route path="project" element={<Project />} />
     <Route path="*" element={<NotFound />} />

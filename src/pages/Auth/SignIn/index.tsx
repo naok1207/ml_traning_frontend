@@ -48,6 +48,9 @@ const SignIn = () => {
         />
         <AuthFormButton type='submit'>Sign In</AuthFormButton>
         <AuthLinkWrapper>
+          <Link to={linkPath.passwordReset}>パスワードを忘れましたか？</Link>
+        </AuthLinkWrapper>
+        <AuthLinkWrapper>
           <Link to={linkPath.signup}>sign up</Link>
         </AuthLinkWrapper>
       </AuthForm>

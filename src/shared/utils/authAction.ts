@@ -9,6 +9,16 @@ export type SignUpAuthType = AuthType & {
   passwordConfirmation: string
 }
 
+export type SendResetMailType = {
+  email: string
+}
+
+export type PasswordResetType = {
+  resetPasswordToken: string
+  password: string
+  passwordConfirmation: string
+}
+
 const authUrl = (path?: string) => `${process.env.REACT_APP_BACKEND_URL || ''}/users/${path || ''}`
 
 // SignIn
@@ -70,3 +80,50 @@ export const onSignOut = async (token: string) =>
     removeStoredAuthToken()
   })
   // .catch((err) => console.error("err", err));
+
+
+// PasswordReset
+const sendEmail = async ({ email }: SendResetMailType) =>
+  fetch(authUrl("password"), {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user: {
+        email,
+      },
+    }),
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(res.toString());
+  })
+
+const onReset = async ({ resetPasswordToken, password, passwordConfirmation }: PasswordResetType) =>
+  fetch(authUrl("password"), {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user: {
+        reset_password_token: resetPasswordToken,
+        password,
+        password_confirmation: passwordConfirmation,
+      },
+    }),
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(res.toString());
+  })
+
+export const PasswordReset = {
+  sendEmail,
+  onReset
+}
