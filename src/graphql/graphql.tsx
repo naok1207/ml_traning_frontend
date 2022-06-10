@@ -50,6 +50,7 @@ export type MutationUpdateTaskArgs = {
 /** Query */
 export type Query = {
   __typename?: 'Query'
+  currentUser: User
   task: Task
   tasks: Array<Task>
 }
@@ -120,6 +121,14 @@ export type TaskUpdatePayload = {
   task: Task
 }
 
+export type User = {
+  __typename?: 'User'
+  createdAt: Scalars['ISO8601DateTime']
+  email: Scalars['String']
+  id: Scalars['ID']
+  updatedAt: Scalars['ISO8601DateTime']
+}
+
 export type CreateTaskMutationVariables = Exact<{
   params: TaskAttributes
 }>
@@ -171,6 +180,19 @@ export type UpdateTaskMutation = {
       updatedAt: string
     }
   } | null
+}
+
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>
+
+export type CurrentUserQuery = {
+  __typename?: 'Query'
+  currentUser: {
+    __typename?: 'User'
+    createdAt: string
+    email: string
+    id: string
+    updatedAt: string
+  }
 }
 
 export type TaskQueryVariables = Exact<{
@@ -366,6 +388,64 @@ export type UpdateTaskMutationResult = Apollo.MutationResult<UpdateTaskMutation>
 export type UpdateTaskMutationOptions = Apollo.BaseMutationOptions<
   UpdateTaskMutation,
   UpdateTaskMutationVariables
+>
+export const CurrentUserDocument = gql`
+  query CurrentUser {
+    currentUser {
+      createdAt
+      email
+      id
+      updatedAt
+    }
+  }
+`
+
+/**
+ * __useCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    CurrentUserQuery,
+    CurrentUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(
+    CurrentUserDocument,
+    options
+  )
+}
+export function useCurrentUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CurrentUserQuery,
+    CurrentUserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(
+    CurrentUserDocument,
+    options
+  )
+}
+export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>
+export type CurrentUserLazyQueryHookResult = ReturnType<
+  typeof useCurrentUserLazyQuery
+>
+export type CurrentUserQueryResult = Apollo.QueryResult<
+  CurrentUserQuery,
+  CurrentUserQueryVariables
 >
 export const TaskDocument = gql`
   query Task($taskId: ID!) {

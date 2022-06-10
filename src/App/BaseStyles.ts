@@ -14,14 +14,14 @@ export default createGlobalStyle`
     margin: 0;
   }
   form {
-    p {
+    .error {
       color: rgba(255, 255, 255, 0.6);
       margin-top: 8px;
       margin-bottom: -10px;
       margin-left: 12px;
       font-size: 14px;
     }
-    p::before {
+    .error::before {
       display: inline;
       content: "⚠ ";
     }

@@ -25,7 +25,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, PropType>(
         render={({ messages }) =>
           messages &&
           Object.entries(messages).map(([type, message]) => (
-            <p key={type}>{message}</p>
+            <p key={type} className='error'>{message}</p>
           ))
         }
       />
